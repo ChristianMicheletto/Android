@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="top"
+        android:text="Play the Game"
+        android:textSize="70px"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        >
+
+        <Button
+            android:id="@+id/Bottone1"
+            android:layout_width="150px"
+            android:layout_height="150px"
+            android:text="\?"
+            android:textAlignment="center"
+            android:textSize="45px" />
+
+        <Button
+            android:id="@+id/Bottone2"
+            android:layout_width="150px"
+            android:layout_height="150px"
+            android:text="\?"
+            android:textAlignment="center"
+            android:textSize="45px" />
+
+        <Button
+            android:id="@+id/Bottone3"
+            android:layout_width="150px"
+            android:layout_height="150px"
+            android:text="\?"
+            android:textAlignment="center"
+            android:textSize="45px" />
+
+        <Button
+            android:id="@+id/Bottone4"
+            android:layout_width="150px"
+            android:layout_height="150px"
+            android:text="\?"
+            android:textAlignment="center"
+            android:textSize="45px" />
+
+    </LinearLayout>
+
+
+    <EditText
+        android:layout_width="180px"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="70px"
+        android:id="@+id/eT"
+        android:inputType="textCapCharacters" />
+
+</LinearLayout>
