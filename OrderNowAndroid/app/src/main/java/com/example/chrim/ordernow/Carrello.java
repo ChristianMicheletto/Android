@@ -1,56 +1,140 @@
 package com.example.chrim.ordernow;
 
-import android.util.Pair;
+import java.util.List;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
-import java.util.HashMap;
-import java.util.Map;
+
 
 public class Carrello {
 
-    Double totale;
-    Map<Double, Pair<Piatto, Integer>> carrello;
-    Piatto piatto;
+    @SerializedName("prezzoTotale")
+    @Expose
+    private String prezzoTotale;
+    @SerializedName("Carrello")
+    @Expose
+    private List<DatiCarrello> carrello = null;
+    @SerializedName("Tavolo")
+    @Expose
+    private String tavolo;
+    @SerializedName("CodiceRistorante")
+    @Expose
+    private String codiceRistorante;
 
-    public Carrello() {
-        carrello = new HashMap<>();
+    public String getPrezzoTotale() {
+        return prezzoTotale;
     }
 
-    public Double getTotale() {
-        return totale;
+    public void setPrezzoTotale(String prezzoTotale) {
+        this.prezzoTotale = prezzoTotale;
     }
 
-    public void setTotale(Double totale) {
-        this.totale = totale;
-    }
-
-    public Map<Double, Pair<Piatto, Integer>> getCarrello() {
+    public List<DatiCarrello> getCarrello() {
         return carrello;
     }
 
-    public void setCarrello(Map<Double, Pair<Piatto, Integer>> carrello) {
+    public void setCarrello(List<DatiCarrello> carrello) {
         this.carrello = carrello;
     }
 
-    public void addPiatto(Piatto p, int quantita, Double costo) {
-        carrello.put(costo, new Pair<>(p, quantita));
-        totale += costo;
-
+    public String getTavolo() {
+        return tavolo;
     }
 
-    public void ricalcolaTotale() {
-        totale = 0d;
-        Double[] app = (Double[]) carrello.keySet().toArray();
-        for (int k = 0; k < app.length; k++) {
-            totale += app[k];
-        }
+    public void setTavolo(String tavolo) {
+        this.tavolo = tavolo;
     }
 
-    @Override
-    public String toString() {
-        return "Carrello{" +
-                "carrello=" + carrello +
-                '}';
+    public String getCodiceRistorante() {
+        return codiceRistorante;
     }
+
+    public void setCodiceRistorante(String codiceRistorante) {
+        this.codiceRistorante = codiceRistorante;
+    }
+
 }
+class DatiCarrello {
 
+    @SerializedName("Tipo")
+    @Expose
+    private String tipo;
+    @SerializedName("Nome")
+    @Expose
+    private String nome;
+    @SerializedName("Costo")
+    @Expose
+    private Double costo;
+    @SerializedName("Ingredienti")
+    @Expose
+    private String ingredienti;
+    @SerializedName("Quantita")
+    @Expose
+    private Integer quantita;
+    @SerializedName("Prezzo")
+    @Expose
+    private Double prezzo;
+
+    public DatiCarrello() {
+    }
+
+    public DatiCarrello(String tipo, String nome, Double costo, String ingredienti, Integer quantita, Double prezzo) {
+        super();
+        this.tipo = tipo;
+        this.nome = nome;
+        this.costo = costo;
+        this.ingredienti = ingredienti;
+        this.quantita = quantita;
+        this.prezzo = prezzo;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public Double getCosto() {
+        return costo;
+    }
+
+    public void setCosto(Double costo) {
+        this.costo = costo;
+    }
+
+    public String getIngredienti() {
+        return ingredienti;
+    }
+
+    public void setIngredienti(String ingredienti) {
+        this.ingredienti = ingredienti;
+    }
+
+    public Integer getQuantita() {
+        return quantita;
+    }
+
+    public void setQuantita(Integer quantita) {
+        this.quantita = quantita;
+    }
+
+    public Double getPrezzo() {
+        return prezzo;
+    }
+
+    public void setPrezzo(Double prezzo) {
+        this.prezzo = prezzo;
+    }
+
+}
 

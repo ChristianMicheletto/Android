@@ -11,10 +11,12 @@ import android.widget.TextView;
 class AdapterPiatti extends RecyclerView.Adapter<AdapterPiatti.ViewHolder> {
     private static Piatti piatti;
     private Context context;
+    private String tipo;
 
-    public AdapterPiatti(Context context, Piatti piatti) {
+    public AdapterPiatti(Context context, Piatti piatti, String tipo) {
         this.context = context;
         this.piatti = piatti;
+        this.tipo= tipo;
     }
 
 
@@ -65,6 +67,7 @@ class AdapterPiatti extends RecyclerView.Adapter<AdapterPiatti.ViewHolder> {
             FragmentManager manager = ((MenuActivity) context).getSupportFragmentManager();
             AggiungiPiattoFrag dialogFragment = new AggiungiPiattoFrag();
             dialogFragment.piatto=piatto;
+            dialogFragment.tipo= tipo;
             dialogFragment.show(manager, "Aggiungi Piatto");
 
         }

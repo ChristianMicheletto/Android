@@ -34,7 +34,7 @@ public class MenuActivity extends AppCompatActivity implements AggiungiPiattoFra
                 Piatti piatti = response.body();
                 if (piatti.getSize()!=0) {
                     recyclerView = findViewById(R.id.listaPiatti);
-                    adapterPiatti = new AdapterPiatti(getApplicationContext(), piatti);
+                    adapterPiatti = new AdapterPiatti(getApplicationContext(), piatti, tipo);
                     RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
                     recyclerView.setLayoutManager(mLayoutManager);
                     recyclerView.setAdapter(adapterPiatti);
@@ -52,8 +52,10 @@ public class MenuActivity extends AppCompatActivity implements AggiungiPiattoFra
         });
     }
 
+
+
     @Override
-    public void onItemInserted(Piatto piatto) {
+    public void onItemInserted(DatiCarrello datiCarrello) {
 
     }
 }

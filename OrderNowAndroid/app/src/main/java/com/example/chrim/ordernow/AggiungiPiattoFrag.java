@@ -8,6 +8,7 @@ import android.support.v7.app.AlertDialog;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,20 +20,23 @@ import android.widget.Toast;
 
 public class AggiungiPiattoFrag extends DialogFragment implements NumberPicker.OnValueChangeListener {
 
+    String tipo;
     private OnItemInserted listener;
     Double totale;
     Piatto piatto;
+    Integer quantita;
 
     @Override
     public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+        quantita = newVal;
         Double costo = piatto.getCosto();
-        totale= newVal * costo;
+        totale = quantita * costo;
         ((TextView) getDialog().findViewById(R.id.totale)).setText(totale.toString());
 
     }
 
     public interface OnItemInserted {
-        void onItemInserted(Piatto piatto);
+        void onItemInserted(DatiCarrello datiCarrello);
     }
 
     @Override
@@ -69,15 +73,16 @@ public class AggiungiPiattoFrag extends DialogFragment implements NumberPicker.O
         alertDialog.setView(R.layout.fragment_aggiungi_dialog);
         alertDialog.setPositiveButton("Ok",
                 (dialog, whichButton) -> {
-
-
-                    if (nome.equals("") || creatori.equals("") || descrizione.equals("")) {
-                        Toast.makeText(getContext(), "I campi non possono essere vuoti", Toast.LENGTH_SHORT).show();
-                        dismiss();
-                    } else {
+                    if (quantita > 0) {
                         if (listener != null)
-                            listener.onItemInserted(new Films(nome, creatori, descrizione));
+                            listener.onItemInserted(new DatiCarrello(tipo, piatto.getNome(), piatto.getCosto(),
+                                    piatto.getIngredienti(), quantita, totale));
+                    } else {
+                        Toast.makeText(getContext(), "La quantità non può essere 0", Toast.LENGTH_SHORT).show();
+                        dismiss();
                     }
+
+
                 }
         );
         alertDialog.setNegativeButton("Cancel",

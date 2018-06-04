@@ -1,5 +1,6 @@
 package com.example.chrim.ordernow;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -44,8 +45,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         et = findViewById(R.id.codiceRistorante);
+        Carrello carrello = new Carrello();
         bt = findViewById(R.id.bottone);
-
         bt.setOnClickListener((View v) -> {
             final String cod = et.getText().toString();
             RetrofitService service = RetrofitClient.getClient().create(RetrofitService.class);
@@ -64,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
                         intent.putExtra("codRistorante", cod);
                         intent.putExtra("nomeRistorante", nomeRistorante);
                         intent.putExtra("tipoRistorante", tipoRistorante);
+                        Bundle bundle = new Bundle();
                         startActivity(intent);
                     } else {
                         Toast.makeText(getApplicationContext(), "Ristorante non trovato", Toast.LENGTH_LONG).show();
