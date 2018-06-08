@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="top"
+        android:text="Play the Game"
+        android:textSize="70px" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/Bottone1"
+            android:layout_width="170px"
+            android:layout_height="170px"
+            android:text="\?"
+            android:textAlignment="center"
+            android:textSize="70px" />
+
+        <Button
+            android:id="@+id/Bottone2"
+            android:layout_width="170px"
+            android:layout_height="170px"
+            android:text="\?"
+            android:textAlignment="center"
+            android:textSize="70px" />
+
+        <Button
+            android:id="@+id/Bottone3"
+            android:layout_width="170px"
+            android:layout_height="170px"
+            android:text="\?"
+            android:textAlignment="center"
+            android:textSize="70px" />
+
+        <Button
+            android:id="@+id/Bottone4"
+            android:layout_width="170px"
+            android:layout_height="170px"
+            android:text="\?"
+            android:textAlignment="center"
+            android:textSize="70px" />
+
+    </LinearLayout>
+
+
+    <EditText
+        android:id="@+id/eT"
+        android:layout_width="180px"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="70px"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="70px"
+        android:id="@+id/inserisci"
+        android:textColor="@color/RED"
+        />
+
+</LinearLayout>
