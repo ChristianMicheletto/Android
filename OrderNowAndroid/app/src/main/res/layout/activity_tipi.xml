@@ -4,33 +4,44 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
+
+    <GridLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="15dp"
-        android:fontFamily="casual"
-        android:text="Benvenuto da:"
-        android:textSize="35dp"
-        android:textStyle="bold"
-        android:id="@+id/benvenuto"
-        />
+        android:layout_marginLeft="5dp"
+        >
+
+        <TextView
+            android:id="@+id/benvenuto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="casual"
+            android:maxWidth="250dp"
+            android:text="Benvenuto da: "
+            android:textSize="25dp"
+            android:textStyle="bold"
+            />
+
+        <TextView
+            android:id="@+id/Carrello"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxWidth="125dp"
+            android:text=""
+            android:textSize="25dp"
+            android:textStyle="bold"
+            android:layout_marginEnd="5dp"
+
+            />
+    </GridLayout>
+
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/listaTipi"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp">
+        android:layout_height="wrap_content">
 
     </android.support.v7.widget.RecyclerView>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:id="@+id/Carrello"
-        android:gravity="center"
-        android:textSize="30dp"
-        android:textStyle="bold"
-        android:text=""
-        />
+
 </LinearLayout>

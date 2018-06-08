@@ -9,17 +9,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.io.Serializable;
+
 
 public class AdapterTipi extends RecyclerView.Adapter<AdapterTipi.ViewHolder> {
 
     private static Tipi tipi;
     private Context context;
     private String cod;
+    private Carrello carrello;
 
-    public AdapterTipi(Context context, Tipi tipi, String cod) {
+    public AdapterTipi(Context context, Tipi tipi, String cod, Carrello carrello) {
         this.context = context;
         this.tipi = tipi;
         this.cod = cod;
+        this.carrello= carrello;
     }
 
 
@@ -65,6 +69,7 @@ public class AdapterTipi extends RecyclerView.Adapter<AdapterTipi.ViewHolder> {
             Intent intent = new Intent(context, MenuActivity.class);
             intent.putExtra("tipo", tipo.getTipo());
             intent.putExtra("codRistorante", cod);
+            intent.putExtra("Carrello", (Serializable) carrello);
             context.startActivity(intent);
         }
     }

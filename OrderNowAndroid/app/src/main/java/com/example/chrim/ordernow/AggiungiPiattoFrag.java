@@ -1,5 +1,6 @@
 package com.example.chrim.ordernow;
 
+
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
@@ -8,42 +9,27 @@ import android.support.v7.app.AlertDialog;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
-import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
-public class AggiungiPiattoFrag extends DialogFragment implements NumberPicker.OnValueChangeListener {
+public class AggiungiPiattoFrag extends DialogFragment {
 
     String tipo;
-    private OnItemInserted listener;
-    Double totale;
-    Piatto piatto;
-    Integer quantita;
+    protected OnItemInserted listener;
+    protected double totale;
+    protected Piatto piatto;
+    protected int quantita;
+    View view;
+    protected Carrello carrello;
 
-    @Override
-    public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
-        quantita = newVal;
-        Double costo = piatto.getCosto();
-        totale = quantita * costo;
-        ((TextView) getDialog().findViewById(R.id.totale)).setText(totale.toString());
-
-    }
 
     public interface OnItemInserted {
         void onItemInserted(DatiCarrello datiCarrello);
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_aggiungi_dialog, container);
-    }
 
     @Override
     public void onAttach(Context context) {
@@ -51,6 +37,7 @@ public class AggiungiPiattoFrag extends DialogFragment implements NumberPicker.O
         MenuActivity activity = context instanceof MenuActivity ? (MenuActivity) context : null;
         try {
             listener = activity;
+
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString()
                     + " must implement OnHeadlineSelectedListener");
@@ -69,12 +56,29 @@ public class AggiungiPiattoFrag extends DialogFragment implements NumberPicker.O
                 titleText.length(),
                 Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
         );
+
         alertDialog.setTitle(ssBuilder);
-        alertDialog.setView(R.layout.fragment_aggiungi_dialog);
+        view = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_aggiungi_dialog, null);
+        alertDialog.setView(view);
+        final NumberPicker numberPicker = view.findViewById(R.id.nPiatti);
+        numberPicker.setMinValue(0);
+        numberPicker.setMaxValue(10);
+        numberPicker.setOnValueChangedListener((numberPicker1, oldVal, newVal) -> {
+            quantita = newVal;
+            double costo = piatto.getCosto();
+            totale = quantita * costo;
+            System.out.println("Costo "+costo);
+            System.out.println("Totale "+totale);
+            System.out.println("Quantita "+quantita);
+            ((TextView) getDialog().findViewById(R.id.totale)).setText("" + totale);
+        });
         alertDialog.setPositiveButton("Ok",
                 (dialog, whichButton) -> {
                     if (quantita > 0) {
                         if (listener != null)
+                            carrello.setPrezzoTotale(totale);
+                            carrello.AddDatiCarrello(tipo, piatto.getNome(), piatto.getCosto(),
+                                    piatto.getIngredienti(), quantita, totale);
                             listener.onItemInserted(new DatiCarrello(tipo, piatto.getNome(), piatto.getCosto(),
                                     piatto.getIngredienti(), quantita, totale));
                     } else {

@@ -1,20 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <GridLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="15dp"
-        android:fontFamily="casual"
-        android:text=""
-        android:textSize="35dp"
-        android:textStyle="bold"
-        android:id="@+id/tipo"
-        />
+        android:columnCount="2"
+        android:rowCount="1">
+
+        <TextView
+            android:id="@+id/tipo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:fontFamily="casual"
+            android:text="tipo"
+            android:textSize="25dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@id/Carrello"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginEnd="10dp"
+            android:text="carrello"
+            android:textSize="25dp"
+            android:textStyle="bold" />
+
+
+    </GridLayout>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/listaPiatti"
@@ -23,5 +42,6 @@
         android:layout_marginTop="15dp">
 
     </android.support.v7.widget.RecyclerView>
+
 
 </LinearLayout>

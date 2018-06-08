@@ -10,7 +10,7 @@ public class Carrello {
 
     @SerializedName("prezzoTotale")
     @Expose
-    private String prezzoTotale;
+    private Double prezzoTotale;
     @SerializedName("Carrello")
     @Expose
     private List<DatiCarrello> carrello = null;
@@ -21,11 +21,11 @@ public class Carrello {
     @Expose
     private String codiceRistorante;
 
-    public String getPrezzoTotale() {
+    public Double getPrezzoTotale() {
         return prezzoTotale;
     }
 
-    public void setPrezzoTotale(String prezzoTotale) {
+    public void setPrezzoTotale(Double prezzoTotale) {
         this.prezzoTotale = prezzoTotale;
     }
 
@@ -52,6 +52,12 @@ public class Carrello {
     public void setCodiceRistorante(String codiceRistorante) {
         this.codiceRistorante = codiceRistorante;
     }
+
+    public void AddDatiCarrello(String tipo, String nome, Double costo, String ingredienti, Integer quantita, Double prezzo){
+        new DatiCarrello(tipo,nome,costo,ingredienti,quantita,prezzo);
+    }
+
+
 
 }
 class DatiCarrello {

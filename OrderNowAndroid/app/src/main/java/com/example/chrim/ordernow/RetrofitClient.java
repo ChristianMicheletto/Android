@@ -8,7 +8,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitClient {
 
-    private static String url = "http://192.168.137.102/client/";
+    private static String url = "http://192.168.137.201/client/";
     private static String AUTH = "Basic YTph";
     private static Retrofit retrofit;
     private static OkHttpClient client;

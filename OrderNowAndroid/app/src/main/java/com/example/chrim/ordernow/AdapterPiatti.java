@@ -12,11 +12,13 @@ class AdapterPiatti extends RecyclerView.Adapter<AdapterPiatti.ViewHolder> {
     private static Piatti piatti;
     private Context context;
     private String tipo;
+    private Carrello carrello;
 
-    public AdapterPiatti(Context context, Piatti piatti, String tipo) {
+    public AdapterPiatti(Context context, Piatti piatti, String tipo, Carrello carrello) {
         this.context = context;
         this.piatti = piatti;
         this.tipo= tipo;
+        this.carrello= carrello;
     }
 
 
@@ -68,6 +70,7 @@ class AdapterPiatti extends RecyclerView.Adapter<AdapterPiatti.ViewHolder> {
             AggiungiPiattoFrag dialogFragment = new AggiungiPiattoFrag();
             dialogFragment.piatto=piatto;
             dialogFragment.tipo= tipo;
+            dialogFragment.carrello= carrello;
             dialogFragment.show(manager, "Aggiungi Piatto");
 
         }
