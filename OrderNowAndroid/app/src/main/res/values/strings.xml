@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">ordernow</string>
+    <string name="ordina">Ordina</string>
+    <string name="totale">Totale:</string>
+    <string name="_0">0</string>
+    <string name="carrello">Carrello</string>
+</resources>
