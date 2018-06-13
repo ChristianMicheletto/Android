@@ -46,13 +46,13 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/costoTot"
+                android:id="@+id/prezzo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_marginEnd="10dp"
                 android:layout_marginTop="50dp"
-                android:text="costoTot"
+                android:text="prezzo"
                 android:textSize="15dp"
                 android:textStyle="bold" />
 

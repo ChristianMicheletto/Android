@@ -19,7 +19,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity" />
-        <activity android:name=".MenuActivity" />
+        <activity android:name=".PiattoActivity" />
         <activity android:name=".TipiActivity" />
         <activity android:name=".CarrelloActivity"></activity>
     </application>

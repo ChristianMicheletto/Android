@@ -9,9 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 class AdapterCarrello extends RecyclerView.Adapter<AdapterCarrello.ViewHolder> {
-    private static Piatti piatti;
     private Context context;
-    private String tipo;
     private Carrello carrello;
 
     public AdapterCarrello(Context context, Carrello carrello) {
@@ -19,6 +17,9 @@ class AdapterCarrello extends RecyclerView.Adapter<AdapterCarrello.ViewHolder> {
         this.carrello= carrello;
     }
 
+    public void UpdateCarrello (Carrello carrello){
+        this.carrello=carrello;
+    }
 
     @Override
     public AdapterCarrello.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -43,7 +44,7 @@ class AdapterCarrello extends RecyclerView.Adapter<AdapterCarrello.ViewHolder> {
         private TextView nome;
         private TextView ingredienti;
         private TextView quantita;
-        private TextView costoTot;
+        private TextView prezzo;
         private DatiCarrello datiCarrello;
 
 
@@ -51,7 +52,7 @@ class AdapterCarrello extends RecyclerView.Adapter<AdapterCarrello.ViewHolder> {
             super(itemView);
             nome = itemView.findViewById(R.id.nomePiatto);
             ingredienti = itemView.findViewById(R.id.ingredienti);
-            costoTot = itemView.findViewById(R.id.costoTot);
+            prezzo = itemView.findViewById(R.id.prezzo);
             quantita = itemView.findViewById(R.id.quantita);
             itemView.setOnClickListener(this);
 
@@ -60,7 +61,7 @@ class AdapterCarrello extends RecyclerView.Adapter<AdapterCarrello.ViewHolder> {
         public void setItem(DatiCarrello datiCarrello) {
             this.nome.setText(datiCarrello.getNome());
             this.ingredienti.setText(datiCarrello.getIngredienti());
-            this.costoTot.setText(""+datiCarrello.getPrezzo());
+            this.prezzo.setText(String.format("%s", datiCarrello.getPrezzo()));
             this.quantita.setText(""+datiCarrello.getQuantita());
             this.datiCarrello = datiCarrello;
         }
@@ -69,10 +70,9 @@ class AdapterCarrello extends RecyclerView.Adapter<AdapterCarrello.ViewHolder> {
         public void onClick(View view) {
             FragmentManager manager = ((CarrelloActivity) context).getSupportFragmentManager();
             EditCarrelloFrag dialogFragment = new EditCarrelloFrag();
-            dialogFragment.piatto=piatto;
-            dialogFragment.tipo= tipo;
+            dialogFragment.datiCarrello=datiCarrello;
             dialogFragment.carrello= carrello;
-            dialogFragment.show(manager, "Aggiungi Piatto");
+            dialogFragment.show(manager, "Modifica quantita'");
 
         }
     }

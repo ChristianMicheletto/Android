@@ -1,5 +1,6 @@
 package com.example.chrim.ordernow;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -22,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
     Button bt;
     String nomeRistorante;
     String tipoRistorante;
-    public Carrello carrello;
+    private Carrello carrello;
 
 
     @Override
@@ -32,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         et = findViewById(R.id.codiceRistorante);
         carrello = new Carrello();
+        Context context= this;
         bt = findViewById(R.id.bottone);
         bt.setOnClickListener((View v) -> {
             final String cod = et.getText().toString();
@@ -41,17 +43,14 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onResponse(Call<Ristoranti> call, Response<Ristoranti> response) {
                     Ristoranti ristoranti = response.body();
-
                     if (ristoranti.getRistoranti().size() != 0) {
                         nomeRistorante = ristoranti.getRistoranti().get(0).getNomeRistorante();
                         tipoRistorante = ristoranti.getRistoranti().get(0).getTipoRistorante();
-                        Toast.makeText(getApplicationContext(), nomeRistorante + tipoRistorante, Toast.LENGTH_LONG).show();
-                        System.out.println(nomeRistorante + tipoRistorante);
-                        Intent intent = new Intent(getApplicationContext(), TipiActivity.class);
+                        Intent intent = new Intent(context , TipiActivity.class);
                         intent.putExtra("codRistorante", cod);
                         intent.putExtra("nomeRistorante", nomeRistorante);
                         intent.putExtra("tipoRistorante", tipoRistorante);
-                        intent.putExtra("Carrello", (Serializable) carrello);
+                        intent.putExtra("CarrelloDaMain", carrello);
                         startActivity(intent);
                     } else {
                         Toast.makeText(getApplicationContext(), "Ristorante non trovato", Toast.LENGTH_LONG).show();
@@ -62,7 +61,6 @@ public class MainActivity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Call<Ristoranti> call, Throwable t) {
-                    System.out.println("SDLUFLYGBSKUVKUDCVGKSUDCVGBDSUYBVCDUFCBVLDJFHVBDJFHBL");
                     Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_LONG).show();
                 }
             });

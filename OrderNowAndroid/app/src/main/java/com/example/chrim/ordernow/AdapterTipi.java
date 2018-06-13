@@ -1,6 +1,5 @@
 package com.example.chrim.ordernow;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
@@ -9,21 +8,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.io.Serializable;
-
 
 public class AdapterTipi extends RecyclerView.Adapter<AdapterTipi.ViewHolder> {
 
     private static Tipi tipi;
     private Context context;
-    private String cod;
     private Carrello carrello;
 
-    public AdapterTipi(Context context, Tipi tipi, String cod, Carrello carrello) {
+    public AdapterTipi(Context context, Tipi tipi, Carrello carrello) {
         this.context = context;
         this.tipi = tipi;
-        this.cod = cod;
         this.carrello= carrello;
+    }
+
+    public void UpdateCarrello (Carrello carrello){
+        this.carrello=carrello;
     }
 
 
@@ -38,7 +37,6 @@ public class AdapterTipi extends RecyclerView.Adapter<AdapterTipi.ViewHolder> {
     public void onBindViewHolder(AdapterTipi.ViewHolder holder, int position) {
         Tipo v = tipi.getTipi().get(position);
         holder.setItem(v);
-
     }
 
     @Override
@@ -66,11 +64,11 @@ public class AdapterTipi extends RecyclerView.Adapter<AdapterTipi.ViewHolder> {
 
         @Override
         public void onClick(View view) {
-            Intent intent = new Intent(context, MenuActivity.class);
+            Intent intent = new Intent(context, PiattoActivity.class);
             intent.putExtra("tipo", tipo.getTipo());
-            intent.putExtra("codRistorante", cod);
-            intent.putExtra("Carrello", (Serializable) carrello);
-            context.startActivity(intent);
+            intent.putExtra("codRistorante", carrello.getCodiceRistorante());
+            intent.putExtra("CarrelloDaTipi", carrello);
+            ((TipiActivity) context).startActivityForResult(intent,1);
         }
     }
 }

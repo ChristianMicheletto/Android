@@ -3,20 +3,21 @@ package com.example.chrim.ordernow;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.ArrayList;
 import java.util.List;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-
 
 
 public class Carrello implements Parcelable {
 
     @SerializedName("prezzoTotale")
     @Expose
-    private Double prezzoTotale;
+    private Double prezzoTotale = 0.0;
     @SerializedName("Carrello")
     @Expose
-    private List<DatiCarrello> carrello = null;
+    private List<DatiCarrello> carrello;
     @SerializedName("Tavolo")
     @Expose
     private String tavolo;
@@ -25,7 +26,8 @@ public class Carrello implements Parcelable {
     private String codiceRistorante;
 
     public Carrello() {
-        this.carrello= null;
+        this.carrello = new ArrayList<>();
+
     }
 
     protected Carrello(Parcel in) {
@@ -83,17 +85,26 @@ public class Carrello implements Parcelable {
         this.codiceRistorante = codiceRistorante;
     }
 
-    public void AddDatiCarrello(String tipo, String nome, Double costo, String ingredienti, Integer quantita, Double prezzo){
-        new DatiCarrello(tipo,nome,costo,ingredienti,quantita,prezzo);
+    public void AddDatiCarrello(DatiCarrello datiCarrello) {
+        carrello.add(datiCarrello);
     }
 
-    public void DeleteDatiCarrelloByNome(String nome){
-        for (int i =0; i<carrello.size(); i++){
-            if(carrello.get(i).getNome().equals(nome)){
+    public void DeleteDatiCarrelloByNome(String nome) {
+        for (int i = 0; i < carrello.size(); i++) {
+            if (carrello.get(i).getNome().equals(nome)) {
                 carrello.remove(i);
                 break;
             }
         }
+    }
+
+    public DatiCarrello getDatiByNome(String nome) {
+        for (int i = 0; i < carrello.size(); i++) {
+            if (carrello.get(i).getNome().equals(nome))
+                System.out.println("CONTROLLO NOME      " + carrello.get(i).getNome().equals(nome) + carrello.get(i).getNome() + nome);
+            return carrello.get(i);
+        }
+        return null;
     }
 
 
@@ -115,16 +126,29 @@ public class Carrello implements Parcelable {
         parcel.writeString(codiceRistorante);
     }
 
-    public int getSize(){
+    public int getSize() {
         return carrello.size();
     }
 
-    public Double ricalcolaTot(){
-        for (int i= 0; i<carrello.size(); i++){
-            prezzoTotale+=getCarrello().get(i).getPrezzo();
+    public void ricalcolaTot() {
+        prezzoTotale = 0.0;
+        for (int i = 0; i < carrello.size(); i++) {
+            prezzoTotale += getCarrello().get(i).getPrezzo();
         }
+
+    }
+
+    @Override
+    public String toString() {
+        return "Carrello{" +
+                "prezzoTotale=" + prezzoTotale +
+                ", carrello=" + carrello +
+                ", tavolo='" + tavolo + '\'' +
+                ", codiceRistorante='" + codiceRistorante + '\'' +
+                '}';
     }
 }
+
 class DatiCarrello implements Parcelable {
 
     @SerializedName("Tipo")
@@ -268,6 +292,18 @@ class DatiCarrello implements Parcelable {
             parcel.writeByte((byte) 1);
             parcel.writeDouble(prezzo);
         }
+    }
+
+    @Override
+    public String toString() {
+        return "DatiCarrello{" +
+                "tipo='" + tipo + '\'' +
+                ", nome='" + nome + '\'' +
+                ", costo=" + costo +
+                ", ingredienti='" + ingredienti + '\'' +
+                ", quantita=" + quantita +
+                ", prezzo=" + prezzo +
+                '}';
     }
 }
 

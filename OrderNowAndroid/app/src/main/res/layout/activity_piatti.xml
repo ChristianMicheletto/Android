@@ -4,54 +4,21 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <GridLayout
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/tipo"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="15dp"
-        android:columnCount="3"
-        android:rowCount="1">
-
-        <TextView
-            android:id="@+id/tipo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:fontFamily="casual"
-            android:text="tipo"
-            android:textSize="25dp"
-            android:textStyle="bold"
-            android:maxWidth="225dp"
-
-            />
-
-        <TextView
-            android:id="@id/Carrello"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:text="carrello"
-            android:textSize="25dp"
-            android:textStyle="bold" />
-
-        <Button
-            android:id="@+id/Compra"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:background="@drawable/shop"
-            android:layout_marginEnd="10dp"
-            />
-
-    </GridLayout>
-
+        android:layout_marginLeft="10dp"
+        android:fontFamily="casual"
+        android:maxWidth="225dp"
+        android:text="tipo"
+        android:textSize="25dp"
+        android:textStyle="bold" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/listaPiatti"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp">
-
-    </android.support.v7.widget.RecyclerView>
-
+        android:layout_marginTop="15dp" />
 
 </LinearLayout>

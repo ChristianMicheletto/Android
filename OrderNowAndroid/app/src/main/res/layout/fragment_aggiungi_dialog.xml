@@ -28,7 +28,7 @@
         android:layout_gravity="center"
         android:textStyle="bold"
         android:textSize="25dp"
-        android:id="@+id/totale"
+        android:id="@+id/prezzo"
         android:text="@string/_0" />
 
 

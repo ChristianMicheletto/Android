@@ -12,10 +12,9 @@ class AdapterPiatti extends RecyclerView.Adapter<AdapterPiatti.ViewHolder> {
     private static Piatti piatti;
     private Context context;
     private String tipo;
-    private Carrello carrello;
+    protected Carrello carrello;
 
-    public AdapterPiatti(Context context, Piatti piatti, String tipo, Carrello carrello) {
-        this.context = context;
+    public AdapterPiatti(Piatti piatti, String tipo, Carrello carrello) {
         this.piatti = piatti;
         this.tipo= tipo;
         this.carrello= carrello;
@@ -24,6 +23,7 @@ class AdapterPiatti extends RecyclerView.Adapter<AdapterPiatti.ViewHolder> {
 
     @Override
     public AdapterPiatti.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        this.context= parent.getContext();
         View viewHolder = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.row_layout_piatti, parent, false);
         return new AdapterPiatti.ViewHolder(viewHolder);
@@ -33,6 +33,10 @@ class AdapterPiatti extends RecyclerView.Adapter<AdapterPiatti.ViewHolder> {
     public void onBindViewHolder(AdapterPiatti.ViewHolder holder, int position) {
         Piatto p = piatti.getPiatti().get(position);
         holder.setItem(p);
+    }
+
+    public void UpdateCarrello (Carrello carrello){
+        this.carrello=carrello;
     }
 
     @Override
@@ -60,13 +64,13 @@ class AdapterPiatti extends RecyclerView.Adapter<AdapterPiatti.ViewHolder> {
         public void setItem(Piatto piatto) {
             this.nome.setText(piatto.getNome());
             this.ingredienti.setText(piatto.getIngredienti());
-            this.costo.setText(""+piatto.getCosto());
+            this.costo.setText(String.format("%s", piatto.getCosto()));
             this.piatto = piatto;
         }
 
         @Override
         public void onClick(View view) {
-            FragmentManager manager = ((MenuActivity) context).getSupportFragmentManager();
+            FragmentManager manager = ((PiattoActivity) context).getSupportFragmentManager();
             AggiungiPiattoFrag dialogFragment = new AggiungiPiattoFrag();
             dialogFragment.piatto=piatto;
             dialogFragment.tipo= tipo;

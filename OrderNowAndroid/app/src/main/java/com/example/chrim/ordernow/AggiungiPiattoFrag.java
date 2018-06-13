@@ -19,11 +19,12 @@ public class AggiungiPiattoFrag extends DialogFragment {
 
     String tipo;
     protected OnItemInserted listener;
-    protected double totale;
+    protected double prezzo;
     protected Piatto piatto;
     protected int quantita;
     View view;
     protected Carrello carrello;
+    protected double costo;
 
 
     public interface OnItemInserted {
@@ -34,7 +35,7 @@ public class AggiungiPiattoFrag extends DialogFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        MenuActivity activity = context instanceof MenuActivity ? (MenuActivity) context : null;
+        PiattoActivity activity = context instanceof PiattoActivity ? (PiattoActivity) context : null;
         try {
             listener = activity;
 
@@ -47,7 +48,7 @@ public class AggiungiPiattoFrag extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
-        String titleText = "Aggiungi piatti";
+        String titleText = "Aggiungi "+ piatto.getNome();
         ForegroundColorSpan foregroundColorSpan = new ForegroundColorSpan(getContext().getResources().getColor(R.color.rosso));
         SpannableStringBuilder ssBuilder = new SpannableStringBuilder(titleText);
         ssBuilder.setSpan(
@@ -56,7 +57,6 @@ public class AggiungiPiattoFrag extends DialogFragment {
                 titleText.length(),
                 Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
         );
-
         alertDialog.setTitle(ssBuilder);
         view = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_aggiungi_dialog, null);
         alertDialog.setView(view);
@@ -65,28 +65,17 @@ public class AggiungiPiattoFrag extends DialogFragment {
         numberPicker.setMaxValue(10);
         numberPicker.setOnValueChangedListener((numberPicker1, oldVal, newVal) -> {
             quantita = newVal;
-            double costo = piatto.getCosto();
-            totale = quantita * costo;
-            System.out.println("Costo "+costo);
-            System.out.println("Totale "+totale);
-            System.out.println("Quantita "+quantita);
-            ((TextView) getDialog().findViewById(R.id.totale)).setText("" + totale);
+            costo = piatto.getCosto();
+            prezzo = quantita * costo;
+            ((TextView) getDialog().findViewById(R.id.prezzo)).setText(String.format("%s", prezzo));
         });
         alertDialog.setPositiveButton("Ok",
                 (dialog, whichButton) -> {
                     if (quantita > 0) {
-                        if (listener != null)
-                            carrello.setPrezzoTotale(totale);
-                            carrello.AddDatiCarrello(tipo, piatto.getNome(), piatto.getCosto(),
-                                    piatto.getIngredienti(), quantita, totale);
-                            listener.onItemInserted(new DatiCarrello(tipo, piatto.getNome(), piatto.getCosto(),
-                                    piatto.getIngredienti(), quantita, totale));
-                    } else {
-                        Toast.makeText(getContext(), "La quantità non può essere 0", Toast.LENGTH_SHORT).show();
-                        dismiss();
+                        if (listener != null){
+                          listener.onItemInserted(new DatiCarrello(tipo,piatto.getNome(),costo,piatto.getIngredienti(),quantita,prezzo));
+                        }
                     }
-
-
                 }
         );
         alertDialog.setNegativeButton("Cancel",
