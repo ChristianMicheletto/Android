@@ -12,7 +12,7 @@ import com.google.gson.annotations.SerializedName;
 
 public class Carrello implements Parcelable {
 
-    @SerializedName("prezzoTotale")
+    @SerializedName("PrezzoTotale")
     @Expose
     private Double prezzoTotale = 0.0;
     @SerializedName("Carrello")
@@ -163,7 +163,7 @@ class DatiCarrello implements Parcelable {
     @SerializedName("Ingredienti")
     @Expose
     private String ingredienti;
-    @SerializedName("Quantita")
+    @SerializedName("Quantità")
     @Expose
     private Integer quantita;
     @SerializedName("Prezzo")

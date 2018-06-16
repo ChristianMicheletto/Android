@@ -8,10 +8,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
-
-import java.io.Serializable;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -43,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onResponse(Call<Ristoranti> call, Response<Ristoranti> response) {
                     Ristoranti ristoranti = response.body();
-                    if (ristoranti.getRistoranti().size() != 0) {
+                    if (ristoranti != null && ristoranti.getRistoranti().size() != 0) {
                         nomeRistorante = ristoranti.getRistoranti().get(0).getNomeRistorante();
                         tipoRistorante = ristoranti.getRistoranti().get(0).getTipoRistorante();
                         Intent intent = new Intent(context , TipiActivity.class);

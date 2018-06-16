@@ -3,17 +3,21 @@ package com.example.chrim.ordernow;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Handler;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+
+import org.json.JSONArray;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -39,11 +43,11 @@ public class CarrelloActivity extends AppCompatActivity implements EditCarrelloF
         adapterCarrello = new AdapterCarrello(context, carrello);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(context);
         recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.setAdapter(adapterCarrello);compra= findViewById(R.id.acquista);
+        recyclerView.setAdapter(adapterCarrello);
+        compra = findViewById(R.id.Compra);
         compra.setOnClickListener(v -> {
             FragmentManager manager = ((CarrelloActivity) context).getSupportFragmentManager();
             AcquistaFrag dialogFragment = new AcquistaFrag();
-
             dialogFragment.carrello= carrello;
             dialogFragment.show(manager, "Aggiungi Piatto");
         });
@@ -70,16 +74,23 @@ public class CarrelloActivity extends AppCompatActivity implements EditCarrelloF
     @Override
     public void onItemSent(Carrello carrelloSent) {
         final RetrofitService service = RetrofitClient.getClient().create(RetrofitService.class);
-        Call<Carrello> call = service.sendOrdine(carrelloSent);
-        call.enqueue(new Callback<Carrello>() {
+        Gson gson= new GsonBuilder().create();
+        JsonObject carrelloJSON = gson.toJsonTree(carrelloSent).getAsJsonObject();
+        System.out.println(carrelloJSON);
+        Call<JsonObject> call = service.sendOrdine(carrelloJSON);
+        call.enqueue(new Callback<JsonObject>() {
             @Override
-            public void onResponse(Call<Carrello> call, Response<Carrello> response) {
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                if(response.isSuccessful()){
+                    System.out.println("RISPOSTA SUSDHFGVISDFISD");
+                }
+                System.out.println(response.message());
 
             }
 
             @Override
-            public void onFailure(Call<Carrello> call, Throwable t) {
-
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+                System.out.println(t.getMessage());
             }
         });
     }

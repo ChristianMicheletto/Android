@@ -12,10 +12,4 @@
         android:layout_marginTop="30dp"
         android:textAlignment="center"/>
 
-    <Button
-        android:id="@+id/acquista"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Acquista" />
-
 </LinearLayout>

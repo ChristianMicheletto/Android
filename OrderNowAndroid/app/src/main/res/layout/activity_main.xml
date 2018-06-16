@@ -14,10 +14,12 @@
 
     <EditText
         android:id="@+id/codiceRistorante"
-        android:layout_width="100dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:textAlignment="center"/>
+        android:textAlignment="center"
+        android:minWidth="100dp"
+        />
 
     <Button
         android:id="@+id/bottone"

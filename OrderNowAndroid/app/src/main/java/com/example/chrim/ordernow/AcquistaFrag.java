@@ -10,12 +10,14 @@ import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.EditText;
 
 public class AcquistaFrag extends DialogFragment {
 
     protected OnItemSent listener;
     View view;
     protected Carrello carrello;
+    EditText tavolo;
 
 
     public interface OnItemSent {
@@ -39,8 +41,9 @@ public class AcquistaFrag extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
-        view = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_aggiungi_dialog, null);
+        view = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_compra, null);
         String titleText = "Inserisci il numero del tavolo";
+        tavolo= view.findViewById(R.id.nTavolo);
         ForegroundColorSpan foregroundColorSpan = new ForegroundColorSpan(getContext().getResources().getColor(R.color.rosso));
         SpannableStringBuilder ssBuilder = new SpannableStringBuilder(titleText);
         ssBuilder.setSpan(
@@ -54,6 +57,7 @@ public class AcquistaFrag extends DialogFragment {
         alertDialog.setPositiveButton("Ok",
                 (dialog, whichButton) -> {
                     if (listener != null) {
+                        carrello.setTavolo(tavolo.getText().toString());
                         listener.onItemSent(carrello);
                     }
                 }
